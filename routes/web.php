@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\StudentControler;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tentang-saya', function() {
-    return view('about');
-});
+Route::get('/student', [StudentControler::class, 'index'])->name('student.index');
+Route::get('/student/create', [StudentControler::class, 'create'])->name('student.create');
+Route::post('/student', [StudentControler::class, 'store'])->name('student.store');
+Route::get('/student/{id}/edit', [StudentControler::class,'edit'])->name('student.edit');
+Route::put('/student/{id}', [StudentControler::class,'update'])->name('student.update');
+Route::delete('/student/{id}', [StudentControler::class,'destroy'])->name('student.destroy');
 
-Route::get('/test', function() {
-    return view('test');
-});
+Route::get('/dashboard', function() {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/student', function() {
-    return view('student');
-});
+
+require __DIR__.'/auth.php';
