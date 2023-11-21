@@ -11,8 +11,7 @@ class StudentControler extends Controller
 
         //dd(Student::query()->get());
         return view('student.index', [
-            'students' => Student::get(),
-
+            'students' => Student::query()->get(),
         ]);
     }
 
@@ -35,7 +34,7 @@ class StudentControler extends Controller
         //dd($request->all());
 
       Student::query()->create([
-         'name' => $request->nama,
+         'name' => $request->name,
          'address' => $request->address,
          'phone_number' => $request->phone_number,
          'class' => $request->class,
@@ -93,4 +92,3 @@ class StudentControler extends Controller
 
    }  
 }
-
